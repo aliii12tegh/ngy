@@ -62,7 +62,7 @@ export default function App() {
       });
       if (!res.ok) throw new Error("Failed to analyze image");
       const data = await res.json();
-      setImagePrompt(data.response);
+      setImagePrompt(data.description || data.response || "No description generated.");
     } catch (e) {
       console.error(e);
       alert("Error analyzing image. Make sure backend is running.");
