@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { Image as ImageIcon, Mic, Sparkles, Loader2, UploadCloud, X } from 'lucide-react'
 
-const API_BASE = 'http://127.0.0.1:60504';
+const API_BASE = import.meta.env.VITE_API_URL || 'https://unified-ai-backend.aa6154332.workers.dev';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'image' | 'tts'>('image')
