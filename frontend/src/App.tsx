@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { Image as ImageIcon, Mic, Sparkles, Loader2, UploadCloud, X } from 'lucide-react'
+import { Image as ImageIcon, Mic, Sparkles, Loader2, UploadCloud, X, Download } from 'lucide-react'
 
 const API_BASE = import.meta.env.VITE_API_URL || 'https://unified-ai-backend.aa6154332.workers.dev';
 
@@ -10,6 +10,7 @@ export default function App() {
   const [ttsText, setTtsText] = useState('')
   const [ttsLoading, setTtsLoading] = useState(false)
   const [audioUrl, setAudioUrl] = useState<string | null>(null)
+  const [voice, setVoice] = useState('asteria')
 
   // Image State
   const [imageFile, setImageFile] = useState<File | null>(null)
@@ -26,7 +27,7 @@ export default function App() {
       const res = await fetch(`${API_BASE}/api/tts`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: ttsText })
+        body: JSON.stringify({ text: ttsText, speaker: voice })
       });
       if (!res.ok) throw new Error("Failed to generate audio");
       const blob = await res.blob();
@@ -181,9 +182,21 @@ export default function App() {
               <div className="p-4 border-b border-[var(--color-glaido-border)] flex justify-between items-center bg-black/20">
                 <div className="flex items-center gap-3">
                   <span className="text-sm font-medium text-[var(--color-glaido-text-muted)]">Voice Model</span>
-                  <select className="bg-transparent border-none text-white text-sm font-semibold focus:outline-none cursor-pointer">
-                    <option value="asteria">Asteria (US Female)</option>
-                    <option value="orion">Orion (US Male)</option>
+                  <select 
+                    value={voice}
+                    onChange={(e) => setVoice(e.target.value)}
+                    className="bg-transparent border-none text-white text-sm font-semibold focus:outline-none cursor-pointer"
+                  >
+                    <option value="asteria">Asteria (Female)</option>
+                    <option value="luna">Luna (Female)</option>
+                    <option value="stella">Stella (Female)</option>
+                    <option value="athena">Athena (Female UK)</option>
+                    <option value="hera">Hera (Female)</option>
+                    <option value="orion">Orion (Male)</option>
+                    <option value="arcas">Arcas (Male)</option>
+                    <option value="perseus">Perseus (Male)</option>
+                    <option value="angus">Angus (Male UK)</option>
+                    <option value="homer">Homer (Male)</option>
                   </select>
                 </div>
                 <span className="text-xs text-[var(--color-glaido-text-muted)] font-mono bg-black/40 px-2 py-1 rounded">
@@ -212,9 +225,18 @@ export default function App() {
 
             {audioUrl && (
               <div className="mt-10 bg-[var(--color-glaido-card)] p-6 rounded-2xl border border-[var(--color-glaido-border)] flex flex-col shadow-xl animate-in slide-in-from-bottom-4 duration-500">
-                <h3 className="text-sm font-medium mb-4 text-[var(--color-glaido-accent)] uppercase tracking-wider flex items-center gap-2">
-                    <Mic size={14} /> Output Audio
-                </h3>
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-sm font-medium text-[var(--color-glaido-accent)] uppercase tracking-wider flex items-center gap-2 m-0">
+                      <Mic size={14} /> Output Audio
+                  </h3>
+                  <a 
+                    href={audioUrl} 
+                    download="generated-audio.mp3" 
+                    className="flex justify-center items-center gap-2 text-xs font-bold bg-[var(--color-glaido-bg)] border border-[var(--color-glaido-border)] hover:bg-[var(--color-glaido-border)] hover:text-[var(--color-glaido-accent)] text-white px-3 py-2 rounded-lg transition-colors cursor-pointer"
+                  >
+                    <Download size={14} /> Download MP3
+                  </a>
+                </div>
                 <audio src={audioUrl} controls className="w-full h-12" autoPlay />
               </div>
             )}
