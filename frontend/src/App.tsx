@@ -3,6 +3,14 @@ import { Image as ImageIcon, Mic, Sparkles, Loader2, UploadCloud, X, Download } 
 
 const API_BASE = import.meta.env.VITE_API_URL || 'https://unified-ai-backend.aa6154332.workers.dev';
 
+const SPEAKERS = [
+  "amalthea", "andromeda", "apollo", "arcas", "aries", "asteria", "athena", "atlas", 
+  "aurora", "callista", "cora", "cordelia", "delia", "draco", "electra", "harmonia", 
+  "helena", "hera", "hermes", "hyperion", "iris", "janus", "juno", "jupiter", "luna", 
+  "mars", "minerva", "neptune", "odysseus", "ophelia", "orion", "orpheus", "pandora", 
+  "phoebe", "pluto", "saturn", "thalia", "theia", "vesta", "zeus"
+];
+
 export default function App() {
   const [activeTab, setActiveTab] = useState<'image' | 'tts'>('image')
 
@@ -187,16 +195,9 @@ export default function App() {
                     onChange={(e) => setVoice(e.target.value)}
                     className="bg-transparent border-none text-white text-sm font-semibold focus:outline-none cursor-pointer"
                   >
-                    <option value="asteria">Asteria (Female)</option>
-                    <option value="luna">Luna (Female)</option>
-                    <option value="stella">Stella (Female)</option>
-                    <option value="athena">Athena (Female UK)</option>
-                    <option value="hera">Hera (Female)</option>
-                    <option value="orion">Orion (Male)</option>
-                    <option value="arcas">Arcas (Male)</option>
-                    <option value="perseus">Perseus (Male)</option>
-                    <option value="angus">Angus (Male UK)</option>
-                    <option value="homer">Homer (Male)</option>
+                    {SPEAKERS.map(s => (
+                      <option key={s} value={s}>{s.charAt(0).toUpperCase() + s.slice(1)}</option>
+                    ))}
                   </select>
                 </div>
                 <span className="text-xs text-[var(--color-glaido-text-muted)] font-mono bg-black/40 px-2 py-1 rounded">
