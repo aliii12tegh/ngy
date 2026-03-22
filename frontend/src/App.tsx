@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { Image as ImageIcon, Mic, Sparkles, Loader2, UploadCloud, X, Download } from 'lucide-react'
+import { Image as ImageIcon, Mic, Sparkles, Loader2, UploadCloud, X, Download, BrainCircuit } from 'lucide-react'
 
 const API_BASE = import.meta.env.VITE_API_URL || 'https://unified-ai-backend.aa6154332.workers.dev';
 
@@ -86,8 +86,8 @@ export default function App() {
       {/* Header & Nav */}
       <header className="w-full max-w-4xl pt-16 pb-12 flex flex-col items-center justify-center">
         <div className="flex items-center gap-3 mb-10">
-          <div className="w-10 h-10 rounded-xl bg-[var(--color-glaido-accent)] flex items-center justify-center text-black shadow-[0_0_20px_rgba(188,243,102,0.3)]">
-            <Sparkles size={20} />
+          <div className="w-12 h-12 rounded-xl bg-[var(--color-glaido-accent)] flex items-center justify-center text-black shadow-[0_0_20px_rgba(188,243,102,0.3)] transform transition-transform hover:scale-105">
+            <BrainCircuit size={28} strokeWidth={2.5} />
           </div>
           <h1 className="text-4xl font-bold tracking-tighter">OmniAI</h1>
         </div>
