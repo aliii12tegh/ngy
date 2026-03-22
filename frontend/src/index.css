@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+  --color-glaido-bg: #0A0A0A;
+  --color-glaido-card: #141414;
+  --color-glaido-border: #262626;
+  --color-glaido-accent: #Bcf366;
+  --color-glaido-accent-dim: rgba(188, 243, 102, 0.1);
+  --color-glaido-text: #FFFFFF;
+  --color-glaido-text-muted: #A1A1AA;
+}
+
+:root {
+  background-color: var(--color-glaido-bg);
+  color: var(--color-glaido-text);
+  font-family: 'Inter', system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+}

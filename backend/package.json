@@ -1,0 +1,14 @@
+{
+  "name": "unified-ai-backend",
+  "version": "1.0.0",
+  "description": "Cloudflare worker for TTS and Image to text",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "wrangler": "^3.111.0"
+  }
+}
